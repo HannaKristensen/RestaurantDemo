@@ -31,6 +31,7 @@ namespace RestaurantDemo.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -49,25 +50,35 @@ namespace RestaurantDemo.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "UserName")]
+        [StringLength(100, ErrorMessage = "Username is too long", MinimumLength = 5)]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+    }
 
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+    public class LogOutViewModel
+    {
+        [Required]
+        [Display(Name = "UserName")]
+        [StringLength(100, ErrorMessage = "Username is too long", MinimumLength = 5)]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
     }
 
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [StringLength(100, ErrorMessage = "Username is too long", MinimumLength = 5)]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

@@ -270,6 +270,7 @@
     <Content Include="Views\OrderItems\Details.cshtml" />
     <Content Include="Views\OrderItems\Edit.cshtml" />
     <Content Include="Views\OrderItems\Index.cshtml" />
+    <Content Include="Views\Account\LogOffCheckIn.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -9,3 +9,10 @@
 ('Taco Salad', 'A blend of seitan taco meat, lettuce, cabbage, salsa fresca, roasted corn, green onions, cilantro, and tortilla strips. Served with creamy chipotle dressing.','Taco Meat, Arcadian Lettuce Mix, Green and Red Cabbage, Salsa Fresca, Chipotle Sauce, Tortilla Strips, Roasted Corn, Green Onion, Cilantro', 'Dinner', 10.50, 1),
 ('Oatmeal Crème Pie', 'Big cookie filled with sweet icying cream', 'unbleached unbromated enriched flour (wheat flour, malted barley flour, niacin, reduced iron, thiamin, mononitrate, riboflavin, folic acid), chocolate chips (sugar, chocolate liquor, cocoa butter, sunflower lecithin [an emulsifier], vanilla extract), brown sugar, vegan margarine (oil blend- canola, palm fruit and olive oils), water, salt, contains less than 2% of each of the following: corn starch, vanilla extract, soy lecithin (an emulsifier), baking soda salt', 'Dessert', 4.75, 1),
 ('Chocolate Chip Cookie', 'Yummy cookie with lost of choclate chips', 'water, expeller processed natural oil blend (soybean, palm fruit and olive), maltodextrin, Non-GMO (soy protein, tofu), nondairy lactic acid, blend of natural gums (locust bean, guar, cellulose, xanthan and carrageenan), organic sugar, vegetable mono and diglycerides, salt, plant-based margarine, powdered sugar, unbleached flour, baking powder, sea salt, cinnamon, baking soda, sugar, brown sugar, vanilla extract, egg replacer (potato starch, tapioca flour, calcium lactate, calcium carbonate, cream of tartar, cellulose gum, modified cellulose), rolled oats', 'Dessert', 2.50, 1);
+
+
+  INSERT INTO [dbo].[AspNetRoles] Values
+  (1,'admin')
+
+INSERT INTO [dbo].AspNetUserRoles Values
+('9fbfc3f8-e718-40c9-ab2c-68b4c571b291', 1)

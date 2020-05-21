@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -18,6 +19,7 @@ namespace RestaurantDemo.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private DBContext db = new DBContext();
 
         public AccountController()
         {
@@ -96,43 +98,35 @@ namespace RestaurantDemo.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> LogOffCheckIn()
+        public ActionResult LogOffCheckIn()
         {
-            return View();
+            LogOutViewModel model = new LogOutViewModel();
+            model.UserName = User.Identity.GetUserName();
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<ActionResult> LogOffCheckIn(LoginViewModel model)
+        public async Task<ActionResult> LogOffCheckIn(LogOutViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, false, shouldLockout: false);
-            if (result == SignInStatus.Success && User.IsInRole("Admin"))
+            switch (result)
             {
-                switch (result)
-                {
-                    case SignInStatus.Success:
-                        LogOff();
-                        return RedirectToAction("Login", "Account");
+                case SignInStatus.Success:
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    return RedirectToAction("Index", "Home");
 
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
 
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
-                        return View(model);
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "Invalid login attempt.");
-                return View(model);
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
             }
         }
 

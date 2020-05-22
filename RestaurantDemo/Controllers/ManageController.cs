@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using RestaurantDemo.DAL;
 using RestaurantDemo.Models;
 
 namespace RestaurantDemo.Controllers
 {
     [Authorize]
+    [PrincipalPermission(SecurityAction.Demand, Role = "admin")]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -32,9 +36,9 @@ namespace RestaurantDemo.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -48,6 +52,24 @@ namespace RestaurantDemo.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        public ActionResult ManageUsers()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ManageUsers(ManagePasswordChange model)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var store = new UserStore<ApplicationUser>(db);
+                var manager = new UserManager<ApplicationUser, string>(store);
+
+                var result = manager.ChangePassword(model.UserID, model.UserPassword, model.UserPasswordNew);
+            }
+            return View();
         }
 
         //
@@ -333,7 +355,8 @@ namespace RestaurantDemo.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
+
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +407,6 @@ namespace RestaurantDemo.Controllers
             Error
         }
 
-#endregion
+        #endregion Helpers
     }
 }

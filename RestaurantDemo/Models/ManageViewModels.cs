@@ -12,6 +12,15 @@ namespace RestaurantDemo.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+
+        public string UserEmail { get; set; }
+    }
+
+    public class ManagePasswordChange
+    {
+        public string UserID { get; set; }
+        public string UserPassword { get; set; }
+        public string UserPasswordNew { get; set; }
     }
 
     public class ManageLoginsViewModel

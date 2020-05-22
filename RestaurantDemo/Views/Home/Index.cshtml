@@ -10,4 +10,10 @@
 
 <div class="row">
     <div class="col-md-4">
+        @if (ViewBag.AdminRole == true)
+        {
+            <li class="navbar-link">
+                @Html.ActionLink("Manage", "Index", "Manage")
+            </li>
+        }
     </div>

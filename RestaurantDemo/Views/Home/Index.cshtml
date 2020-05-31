@@ -1,12 +1,7 @@
-﻿@{
+﻿@model RestaurantDemo.Models.ViewModels.MenuViewModel
+@{
     ViewBag.Title = "Home Page";
 }
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
 <div class="row">
     <div class="col-md-4">
@@ -16,4 +11,34 @@
                 @Html.ActionLink("Manage", "Index", "Manage")
             </li>
         }
+    </div>
+    <br />
+    <br />
+    <h1 style="text-align: center">Welcome To Demo!</h1>
+    <br />
+    <br />
+    <div id="menu">
+        @{
+            var catagory = Model.Catagory[0];
+            <h1 style="text-align: center">@catagory</h1>
+            for (int i = 0; i < Model.PK.Count(); i++)
+            {
+                if (catagory != Model.Catagory[i])
+                {
+                    <br/>
+                    <br/>
+                    <h1 style="text-align: center">@Model.Catagory[i]</h1>
+                    catagory = Model.Catagory[i];
+                }
+                if (Model.Avalible[i] == true)
+                {
+                    <h4>@Model.Title[i] . . . $@Model.Price[i]     <button onclick="add(@Model.PK[i], @Model.Title[i])">Add</button></h4>
+                    <p>@Model.Description[i]</p>
+                    <button onclick="show(@Model.Title[i])">Ingredients</button>
+                    <p class="ingredients" id="@Model.Title[i]">@Model.Ingredients[i]</p>
+                    <br/>
+                    <br/>
+                }
+            }
+          }
     </div>

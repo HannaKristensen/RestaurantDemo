@@ -2,6 +2,8 @@
     padding-top: 50px;
     padding-bottom: 20px;
     font: Monospace;
+    background-color: #f0d3d6;
+    padding: 10px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -10,8 +12,8 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
 */
 .dl-horizontal dt {
     white-space: normal;
@@ -26,4 +28,42 @@ textarea {
 
 .ingredients {
     display: none;
+}
+
+.navbar-inverse {
+    background-color: #82494f !important;
+}
+
+a.mynav {
+    background-color: #82494f !important;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+#rowLunch {
+    border: 5px solid black;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+#rowDinner {
+    border: 5px solid black;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+#rowDessert {
+    border: 5px solid black;
+    padding: 10px;
+    border-radius: 25px;
+}
+.container-fluid {
+    width: 100%
+}
+
+#conDessert {
+    align-content: center;
+    width: 100%;
 }

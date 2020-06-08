@@ -15,8 +15,8 @@
     <br />
     <br />
     <div class="container-fluid">
-    <h1>Welcome To Demo!</h1>
-        </div>
+        <h1 id="title" >Welcome To Demo!</h1>
+    </div>
     <br />
     <br />
     <div class="container-fluid" id="menu">
@@ -25,6 +25,8 @@
             var i = 0;
         }
         <div class="row center-block">
+            <div class="col-sm-1">
+            </div>
             <div id="rowLunch" class="col-md-5 center-block">
                 <h1 style="text-align: center">@catagory</h1>
                 @{
@@ -32,9 +34,9 @@
                     {
                         if (Model.Avalible[i] == true)
                         {
-                            <h4>@Model.Title[i] . . . $@Model.Price[i]     <button onclick="add(@Model.PK[i], @Model.Title[i])">Add</button></h4>
+                            <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.PK[i], @Model.Title[i])">Add</button></h4>
                             <p>@Model.Description[i]</p>
-                            <button onclick="show(@Model.Title[i])">Ingredients</button>
+                            <button id="ingredientsButton" onclick="show(@Model.Title[i])">Ingredients</button>
                             <p class="ingredients" id="@Model.Title[i]">@Model.Ingredients[i]</p>
                             <br />
                             <br />
@@ -43,7 +45,6 @@
                 }
             </div>
             <div class="col-sm-1">
-                <p>   </p>
             </div>
             <div id="rowDinner" class="col-md-5 center-block">
                 @{
@@ -53,9 +54,9 @@
                     {
                         if (Model.Avalible[i] == true)
                         {
-                            <h4>@Model.Title[i] . . . $@Model.Price[i]     <button onclick="add(@Model.PK[i], @Model.Title[i])">Add</button></h4>
+                            <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.PK[i], @Model.Title[i])">Add</button></h4>
                             <p>@Model.Description[i]</p>
-                            <button onclick="show(@Model.Title[i])">Ingredients</button>
+                            <button id="ingredientsButton" onclick="show(@Model.Title[i])">Ingredients</button>
                             <p class="ingredients" id="@Model.Title[i]">@Model.Ingredients[i]</p>
                             <br />
                             <br />
@@ -63,15 +64,20 @@
                     }
 
                 }
+                <br />
+            </div>
+            <div class="col-sm-1">
             </div>
         </div>
         <div class="row">
-        <div class="col-sm-1">
-            <p>   </p>
+            <div class="col-sm-1">
+                <p>   </p>
+            </div>
         </div>
-         </div>
-        <div class="row center-block" id="conDessert">
-            <div id="rowDessert" class="col-md-5 center-block">
+        <div class="row center-block" id="conDessert" style="width: 100%; align-content center;">
+            <div class="col-md-4">
+                </div>
+            <div id="rowDessert" class="col-md-5 center-block" style="align-content: center;">
                 @{
 
                     catagory = Model.Catagory[i + 1];
@@ -80,9 +86,9 @@
                     {
                         if (Model.Avalible[i] == true)
                         {
-                            <h4>@Model.Title[i] . . . $@Model.Price[i]     <button onclick="add(@Model.PK[i], @Model.Title[i])">Add</button></h4>
+                            <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.PK[i], @Model.Title[i])">Add</button></h4>
                             <p>@Model.Description[i]</p>
-                            <button onclick="show(@Model.Title[i])">Ingredients</button>
+                            <button id="ingredientsButton" onclick="show(@Model.Title[i])">Ingredients</button>
                             <p class="ingredients" id="@Model.Title[i]">@Model.Ingredients[i]</p>
                             <br />
                             <br />
@@ -90,5 +96,7 @@
                     }
                 }
             </div>
+            <div class="col-md-4">
+                </div>
         </div>
     </div>

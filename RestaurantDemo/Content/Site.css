@@ -67,3 +67,27 @@ a.mynav {
     align-content: center;
     width: 100%;
 }
+
+#addButton {
+    float: right;
+    border-radius: 25px;
+    font-size: smaller;
+    padding: 5px;
+    background-color: aliceblue;
+    border-color: aliceblue;
+}
+
+#ingredientsButton {
+    border-radius: 25px;
+    font-size: smaller;
+    padding: 5px;
+    background-color: aliceblue;
+    border-color: aliceblue;
+    
+}
+
+#title {
+    font-family: Candara;
+    text-align: center;
+    font-size: 100px;
+}

@@ -2,15 +2,19 @@
 @if (Request.IsAuthenticated)
 {
     @Html.AntiForgeryToken()
+    <div class="container-fluid">
+    <div class="row">
+        <br/>
+        <div class="col-md-3"></div>
+    <div class="col-md-4" style="margin-left:auto;margin-right:auto; text-align: center; font-size: 40px;" id="userName">
+        @User.Identity.GetUserName()
+    </div>
 
-    <ul class="nav navbar-nav navbar-right">
-        <li class="navbar-link">
-            @User.Identity.GetUserName()
-        </li>
-        <li>
-            @Html.ActionLink("Log Off", "LogOffCheckIn", "Account");
-        </li>
-    </ul>
+    <div class="col-md-3" style="text-align: right;">
+            @Html.ActionLink("Log Off", "LogOffCheckIn", "Account")
+    </div>
+    </div>
+    </div>
 }
 else
 {

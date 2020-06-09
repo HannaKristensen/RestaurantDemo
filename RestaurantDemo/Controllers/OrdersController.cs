@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using Microsoft.Ajax.Utilities;
 using RestaurantDemo.DAL;
 using RestaurantDemo.Models;
 
@@ -43,7 +45,7 @@ namespace RestaurantDemo.Controllers
         }
 
         // POST: Orders/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -57,6 +59,43 @@ namespace RestaurantDemo.Controllers
             }
 
             return View(order);
+        }
+
+        public int getTableID(string tableName)
+        {
+            if (tableName == "Table One")
+            {
+                return 1;
+            }
+
+            if (tableName == "Table Two")
+            {
+                return 2;
+            }
+
+            if (tableName == "Table Three")
+            {
+                return 3;
+            }
+
+            return 0;
+        }
+
+        public ActionResult CreateOrder(string OrderTime, string Active, string Table_ID)
+        {
+            Order order = new Order();
+            order.Active = Convert.ToBoolean(Convert.ToInt16(Active));
+            order.OrderTime = Convert.ToDateTime(OrderTime);
+            order.Table_ID = getTableID(Table_ID);
+
+            db.Orders.Add(order);
+            db.SaveChanges();
+
+            int[] arr = db.Orders.Where(x => x.Table_ID == order.Table_ID).Select(x => x.PK).ToArray();
+
+            var json = new JavaScriptSerializer().Serialize(arr[0]);
+
+            return Json(json);
         }
 
         // GET: Orders/Edit/5
@@ -75,7 +114,7 @@ namespace RestaurantDemo.Controllers
         }
 
         // POST: Orders/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

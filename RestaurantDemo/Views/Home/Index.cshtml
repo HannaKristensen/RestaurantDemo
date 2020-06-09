@@ -3,100 +3,102 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="row">
-    <div class="col-md-4">
-        @if (ViewBag.AdminRole == true)
-        {
-            <li class="navbar-link">
-                @Html.ActionLink("Manage", "Index", "Manage")
-            </li>
-        }
-    </div>
-    <br />
-    <br />
-    <div class="container-fluid">
-        <h1 id="title" >Welcome To Demo!</h1>
-    </div>
-    <br />
-    <br />
-    <div class="container-fluid" id="menu">
-        @{
-            var catagory = Model.Catagory[0];
-            var i = 0;
-        }
-        <div class="row center-block">
-            <div class="col-sm-1">
-            </div>
-            <div id="rowLunch" class="col-md-5 center-block">
+@Scripts.Render("~/Scripts/Main.js")
+
+<div class="col-md-4">
+    @if (ViewBag.AdminRole == true)
+    {
+        <li class="navbar-link">
+            @Html.ActionLink("Manage", "Index", "Manage")
+        </li>
+    }
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <h1 id="title">Welcome To Demo!</h1>
+</div>
+<br />
+<br />
+<button id="orderButton" onclick="makeOrder()">Start Ordering</button>
+<div class="container-fluid" id="menu">
+    @{
+        var catagory = Model.Catagory[0];
+        var i = 0;
+    }
+    <div class="row center-block">
+        <div class="col-sm-1">
+        </div>
+        <div id="rowLunch" class="col-md-5 center-block">
+            <h1 style="text-align: center">@catagory</h1>
+            @{
+                for (; catagory == Model.Catagory[i]; i++)
+                {
+                    if (Model.Avalible[i] == true)
+                    {
+                        <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.Title[i])">Add</button></h4>
+                        <p>@Model.Description[i]</p>
+                        <button id="ingredientsButton" onclick="show(@i)">Ingredients</button>
+                        <p class="ingredients" id="@i">@Model.Ingredients[i]</p>
+                        <br />
+                        <br />
+                    }
+                }
+            }
+        </div>
+        <div class="col-sm-1">
+        </div>
+        <div id="rowDinner" class="col-md-5 center-block">
+            @{
+                catagory = Model.Catagory[i + 1];
                 <h1 style="text-align: center">@catagory</h1>
-                @{
-                    for (; catagory == Model.Catagory[i]; i++)
+                for (; catagory == Model.Catagory[i]; i++)
+                {
+                    if (Model.Avalible[i] == true)
                     {
-                        if (Model.Avalible[i] == true)
-                        {
-                            <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.PK[i], @Model.Title[i])">Add</button></h4>
-                            <p>@Model.Description[i]</p>
-                            <button id="ingredientsButton" onclick="show(@Model.Title[i])">Ingredients</button>
-                            <p class="ingredients" id="@Model.Title[i]">@Model.Ingredients[i]</p>
-                            <br />
-                            <br />
-                        }
+                        <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.Title[i])">Add</button></h4>
+                        <p>@Model.Description[i]</p>
+                        <button id="ingredientsButton" onclick="show(@i)">Ingredients</button>
+                        <p class="ingredients" id="@i">@Model.Ingredients[i]</p>
+                        <br />
+                        <br />
                     }
                 }
-            </div>
-            <div class="col-sm-1">
-            </div>
-            <div id="rowDinner" class="col-md-5 center-block">
-                @{
-                    catagory = Model.Catagory[i + 1];
-                    <h1 style="text-align: center">@catagory</h1>
-                    for (; catagory == Model.Catagory[i]; i++)
-                    {
-                        if (Model.Avalible[i] == true)
-                        {
-                            <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.PK[i], @Model.Title[i])">Add</button></h4>
-                            <p>@Model.Description[i]</p>
-                            <button id="ingredientsButton" onclick="show(@Model.Title[i])">Ingredients</button>
-                            <p class="ingredients" id="@Model.Title[i]">@Model.Ingredients[i]</p>
-                            <br />
-                            <br />
-                        }
-                    }
 
-                }
-                <br />
-            </div>
-            <div class="col-sm-1">
-            </div>
+            }
+            <br />
         </div>
-        <div class="row">
-            <div class="col-sm-1">
-                <p>   </p>
-            </div>
-        </div>
-        <div class="row center-block" id="conDessert" style="width: 100%; align-content center;">
-            <div class="col-md-4">
-                </div>
-            <div id="rowDessert" class="col-md-5 center-block" style="align-content: center;">
-                @{
-
-                    catagory = Model.Catagory[i + 1];
-                    <h1 style="text-align: center">@catagory</h1>
-                    for (; i < Model.Catagory.Count(); i++)
-                    {
-                        if (Model.Avalible[i] == true)
-                        {
-                            <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.PK[i], @Model.Title[i])">Add</button></h4>
-                            <p>@Model.Description[i]</p>
-                            <button id="ingredientsButton" onclick="show(@Model.Title[i])">Ingredients</button>
-                            <p class="ingredients" id="@Model.Title[i]">@Model.Ingredients[i]</p>
-                            <br />
-                            <br />
-                        }
-                    }
-                }
-            </div>
-            <div class="col-md-4">
-                </div>
+        <div class="col-sm-1">
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-1">
+            <p>   </p>
+        </div>
+    </div>
+    <div class="row center-block" id="conDessert" style="width: 100%; align-content: center;">
+        <div class="col-md-4">
+        </div>
+        <div id="rowDessert" class="col-md-5 center-block" style="align-content: center;">
+            @{
+
+                catagory = Model.Catagory[i + 1];
+                <h1 style="text-align: center">@catagory</h1>
+                for (; i < Model.Catagory.Count(); i++)
+                {
+                    if (Model.Avalible[i] == true)
+                    {
+                        <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.Title[i])">Add</button></h4>
+                        <p>@Model.Description[i]</p>
+                        <button id="ingredientsButton" onclick="show(@i)">Ingredients</button>
+                        <p class="ingredients" id="@i">@Model.Ingredients[i]</p>
+                        <br />
+                        <br />
+                    }
+                }
+            }
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>

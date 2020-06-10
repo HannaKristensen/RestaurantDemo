@@ -12,7 +12,8 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                @Html.ActionLink("Restaurant", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button class="openbtn" id="orderMenu" onclick="openNav()">☰ Order</button>
+                <button id="orderButton" onclick="makeOrder()">Start Ordering</button>
             </div>
             <div class="navbar-collapse collapse">
                 @Html.Partial("_LoginPartial")

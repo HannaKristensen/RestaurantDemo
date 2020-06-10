@@ -5,22 +5,30 @@
 
 @Scripts.Render("~/Scripts/Main.js")
 
-<div class="col-md-4">
-    @if (ViewBag.AdminRole == true)
-    {
-        <li class="navbar-link">
-            @Html.ActionLink("Manage", "Index", "Manage")
-        </li>
-    }
-</div>
 <br />
 <br />
+<br />
+
 <div class="container-fluid">
     <h1 id="title">Welcome To Demo!</h1>
 </div>
+
 <br />
 <br />
-<button id="orderButton" onclick="makeOrder()">Start Ordering</button>
+
+<div id="mySidepanel" class="sidepanel" style="width: 0px;">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <table id="tableOrder">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total:</td>
+            <td id="price">0</td>
+        </tr>
+    </table>
+</div>
+
 <div class="container-fluid" id="menu">
     @{
         var catagory = Model.Catagory[0];
@@ -36,7 +44,7 @@
                 {
                     if (Model.Avalible[i] == true)
                     {
-                        <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.Title[i])">Add</button></h4>
+                        <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.PK[i], @Model.Price[i])">Add</button></h4>
                         <p>@Model.Description[i]</p>
                         <button id="ingredientsButton" onclick="show(@i)">Ingredients</button>
                         <p class="ingredients" id="@i">@Model.Ingredients[i]</p>
@@ -56,7 +64,7 @@
                 {
                     if (Model.Avalible[i] == true)
                     {
-                        <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.Title[i])">Add</button></h4>
+                        <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.PK[i], @Model.Price[i])">Add</button></h4>
                         <p>@Model.Description[i]</p>
                         <button id="ingredientsButton" onclick="show(@i)">Ingredients</button>
                         <p class="ingredients" id="@i">@Model.Ingredients[i]</p>
@@ -88,7 +96,7 @@
                 {
                     if (Model.Avalible[i] == true)
                     {
-                        <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.Title[i])">Add</button></h4>
+                        <h4>@Model.Title[i] . . . $@Model.Price[i]     <button id="addButton" onclick="add(@Model.PK[i], @Model.Price[i])">Add</button></h4>
                         <p>@Model.Description[i]</p>
                         <button id="ingredientsButton" onclick="show(@i)">Ingredients</button>
                         <p class="ingredients" id="@i">@Model.Ingredients[i]</p>

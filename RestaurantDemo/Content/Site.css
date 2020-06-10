@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 70px;
     padding-bottom: 20px;
     font: Monospace;
     background-color: #f0d3d6;
@@ -59,6 +59,7 @@ a.mynav {
     padding: 10px;
     border-radius: 25px;
 }
+
 .container-fluid {
     width: 100%
 }
@@ -77,17 +78,102 @@ a.mynav {
     border-color: aliceblue;
 }
 
+#orderButton {
+    border-radius: 25px;
+    font-size: 20px;
+    background-color: aliceblue;
+    border-color: aliceblue;
+    border-radius: 25px;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+    float: left;
+    margin-top: 25px
+}
+
 #ingredientsButton {
     border-radius: 25px;
     font-size: smaller;
     padding: 5px;
     background-color: aliceblue;
     border-color: aliceblue;
-    
 }
 
 #title {
     font-family: Candara;
     text-align: center;
     font-size: 100px;
+}
+
+.sidepanel {
+    width: 0px;
+    position: fixed;
+    float: right;
+    z-index: 1;
+    top: 65px;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    color: #ffffff
+}
+
+    .sidepanel a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #ffffff;
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidepanel a:hover {
+            color: #ffffff;
+        }
+
+    .sidepanel .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+    }
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 25px;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    display: none;
+    float: left;
+    margin-top 25px;
+}
+
+    .openbtn:hover {
+        background-color: #444;
+    }
+
+#tableOrder {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+}
+#tableOrder td, #tableOrder th {
+    padding: 8px;
+}
+
+#loginButton {
+    font-size: 10px;
+    border-radius: 25px;
+    background-color: aliceblue;
+    border-color: aliceblue;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+    width: auto;
+    float: right;
+    margin-top: 35px
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using RestaurantDemo.Models.ViewModels;
 using RestaurantDemo.DAL;
+using Newtonsoft.Json;
 
 namespace RestaurantDemo.Controllers
 {
@@ -28,6 +29,15 @@ namespace RestaurantDemo.Controllers
             model.Avalible = menuDB.Menus.Select(x => x.Avalible).ToArray();
 
             return View(model);
+        }
+
+        public ActionResult Menu()
+        {
+            string[] title = menuDB.Menus.Select(x => x.Title).ToArray();
+
+            var json = JsonConvert.SerializeObject(title);
+
+            return Json(json, JsonRequestBehavior.AllowGet);
         }
     }
 }

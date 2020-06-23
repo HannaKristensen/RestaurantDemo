@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestaurantDemo.DAL;
 using RestaurantDemo.Models;
 
@@ -45,7 +47,7 @@ namespace RestaurantDemo.Controllers
         }
 
         // POST: OrderItems/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -60,6 +62,19 @@ namespace RestaurantDemo.Controllers
 
             ViewBag.OrderID = new SelectList(db.Orders, "PK", "PK", orderItem.OrderID);
             return View(orderItem);
+        }
+
+        public ActionResult SubmitOrder(string foodItem, string comment, string orderID)
+        {
+            OrderItem orderItem = new OrderItem();
+            orderItem.Item = foodItem;
+            orderItem.OrderID = Int32.Parse(orderID);
+            orderItem.Comment = comment;
+
+            db.OrderItems.Add(orderItem);
+            db.SaveChanges();
+
+            return Content("");
         }
 
         // GET: OrderItems/Edit/5
@@ -79,7 +94,7 @@ namespace RestaurantDemo.Controllers
         }
 
         // POST: OrderItems/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

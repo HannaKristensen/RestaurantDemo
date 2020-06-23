@@ -93,7 +93,7 @@ namespace RestaurantDemo.Controllers
 
             int[] arr = db.Orders.Where(x => x.Table_ID == order.Table_ID).Select(x => x.PK).ToArray();
 
-            var json = new JavaScriptSerializer().Serialize(arr[0]);
+            var json = new JavaScriptSerializer().Serialize(order.PK);
 
             return Json(json);
         }

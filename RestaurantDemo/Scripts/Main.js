@@ -88,17 +88,16 @@ function add(foodTitle, price) {
 
     cell1.innerHTML = menu[foodTitle - 1];
     cell2.innerHTML = "Comment";
-    cell3.innerHTML = "<button onclick=\"editItem(" + foodTitle + ")\">edit</button>";
-    cell4.innerHTML = "<button onclick=\"deleteItem(this)\">delete</button>"
-    cell5.innerHTML = price;
+    cell3.innerHTML = "<button id=\"OrderSummary\" onclick=\"editItem(" + foodTitle + ")\">edit</button>";
+    cell4.innerHTML = "<button id=\"OrderSummary\" onclick=\"deleteItem(this)\">delete</button>"
+    cell5.innerHTML = "$" + price;
 
     var currentPrice = document.getElementById("price").innerHTML;
     document.getElementById("price").innerHTML = +currentPrice + +price;
- 
 }
 
-function editItem(id){
- var tdObj = document.getElementById("comment" + id)
+function editItem(id) {
+    var tdObj = document.getElementById("comment" + id)
     var preText = tdObj.textContent.trim();
     var inputObj = $("<input class=\"form-control\" type=\"text\" maxlength=\"1000\" />");
     tdObj.textContent = "";
@@ -120,15 +119,16 @@ function editItem(id){
 function deleteItem(btn) {
     var row = btn.parentNode.parentNode;
     var price = row.cells[4].innerHTML
+    var priceFix = price.slice(1);
     var currentPrice = document.getElementById("price").innerHTML;
-    document.getElementById("price").innerHTML = +currentPrice - +price;
+    document.getElementById("price").innerHTML = +currentPrice - +priceFix;
     row.parentNode.removeChild(row);
 }
 
 function openNav() {
     var width = document.getElementById("mySidepanel").style.width;
     if (width == "0px") {
-        document.getElementById("mySidepanel").style.width = "350px";
+        document.getElementById("mySidepanel").style.width = "550px";
     }
     else {
         document.getElementById("mySidepanel").style.width = "0px";
@@ -137,4 +137,35 @@ function openNav() {
 
 function closeNav() {
     document.getElementById("mySidepanel").style.width = "0";
+}
+
+function submitOrder() {
+    var table = document.getElementById("tableOrder");
+    var lengthOfTable = table.rows.length - 2;
+
+    for (var i = 0; i < lengthOfTable; i++) {
+        var food = table.rows[i].cells[0].innerHTML;
+        var comment = table.rows[i].cells[1].innerHTML;
+
+        var dataSend = JSON.stringify({
+            'foodItem': food,
+            'comment': comment,
+            'orderID': orderId
+        });
+
+        $.ajax({
+            type: 'POST',
+            data: dataSend,
+            contentType: "application/json",
+            url: '/OrderItems/SubmitOrder',
+            success: orderMade,
+            error: errorOnAjax
+        });
+    }
+    alert("Order Submited");
+    location.reload();
+}
+
+function orderMade() {
+    console.log("Item Submited");
 }
